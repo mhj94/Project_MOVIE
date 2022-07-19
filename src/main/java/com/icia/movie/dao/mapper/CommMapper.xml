@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Comment">
+
+	<!-- 리뷰 목록 -->
+	<select id="cList" parameterType="int" resultType="comm">
+		SELECT * FROM COMMENTS WHERE CMOVCODE=#{cMovCode}
+	</select>
+	
+	<!-- 리뷰 등록 -->
+	<insert id="cWrite" parameterType="comm">
+		INSERT INTO COMMENTS VALUES(COMM_SEQ.NEXTVAL, #{cWriter}, #{cMovCode}, #{cContents}, SYSDATE)
+	</insert>
+	
+	<!-- 리뷰 삭제 -->
+	<delete id="cDelete" parameterType="comm">
+		DELETE FROM COMMENTS WHERE CNUM=#{cNum} AND CMOVCODE=#{cMovCode}
+	</delete>
+	
+	<!-- 리뷰 수정 -->
+	<update id="cModify" parameterType="comm">
+		UPDATE COMMENTS SET CCONTENTS=#{cContents} WHERE CNUM=#{cNum} AND CMOVCODE=#{cMovCode}
+	</update>
+	
+	
+	
+</mapper>

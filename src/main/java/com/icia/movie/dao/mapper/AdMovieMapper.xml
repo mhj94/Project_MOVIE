@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Movie">
+	<insert id="movWrite" parameterType="adMovie">
+		INSERT INTO MOVWRITE VALUES
+		(#{adMovCode},
+		#{adMovName},#{adMovDirector},#{adMovGenre},#{adMovGrade},#{adMovOpen},#{mFileName}, #{adMovTime})
+	</insert>
+
+	<select id="adMovList" parameterType="paging" resultType="adMovie">
+		SELECT
+		* FROM ADMOVLIST WHERE RN BETWEEN #{startRow} AND #{endRow}
+	</select>
+
+	<select id="movCount" resultType="int">
+		SELECT COUNT(*) FROM MOVWRITE
+	</select>
+
+	<select id="adMovView" parameterType="int" resultType="adMovie">
+		SELECT
+		* FROM MOVWRITE WHERE ADMOVCODE=#{adMovCode}
+	</select>
+
+	<update id="adMovModify" parameterType="adMovie">
+		UPDATE MOVWRITE SET
+		ADMOVNAME=#{adMovName},ADMOVDIRECTOR=#{adMovDirector},ADMOVGENRE=#{adMovGenre},ADMOVGRADE=#{adMovGrade},ADMOVOPEN=#{adMovOpen},ADMOVPOSTER=#{mFileName}, ADMOVTIME=#{adMovTime}
+		WHERE ADMOVCODE=#{adMovCode}
+	</update>
+
+	<delete id="adMovDelete" parameterType="adMovie">
+		DELETE FROM MOVWRITE WHERE ADMOVCODE=#{adMovCode}
+	</delete>
+
+</mapper>

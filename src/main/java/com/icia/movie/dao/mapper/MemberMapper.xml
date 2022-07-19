@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Member">
+
+	<!-- 회원가입 -->
+	<insert id="mJoin" parameterType="member">
+		INSERT INTO MEMBER 
+		VALUES
+		(#{mId},#{mPw},#{mName},#{mBirth, jdbcType=VARCHAR},#{mGender,
+		jdbcType=VARCHAR},#{mPhone},#{mAddr},#{mEmail},default)
+	</insert>
+
+	<!-- 아이디 중복체크 -->
+	<select id="checkId" parameterType="String" resultType="String">
+		SELECT
+		MID FROM MEMBER WHERE MID = #{mId}
+	</select>
+
+	<!-- 로그인 -->
+	<select id="mLogin" parameterType="member" resultType="member">
+		SELECT *
+		FROM MEMBER WHERE MID = #{mId} AND MPW = #{mPw}
+	</select>
+
+	<!-- 암호화 된 비밀번호 검색하기 -->
+	<select id="mEpw" parameterType="String" resultType="String">
+		SELECT MPW
+		FROM MEMBER WHERE MID = #{mId}
+	</select>
+
+	<!-- 상세보기 -->
+	<select id="mView" parameterType="String" resultType="member">
+		SELECT *
+		FROM MEMBER WHERE MID = #{mId}
+	</select>
+	
+</mapper>
